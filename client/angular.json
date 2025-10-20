@@ -7,12 +7,16 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "skipTests": true,
+        "skipTests": true,
           "path": "src"
         },
         "@schematics/angular:service": {
           "skipTests": true,
           "path": "src/core/services"
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true,
+          "path": "src/core/guards"
         }
       },
       "root": "",
