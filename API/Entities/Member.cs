@@ -21,6 +21,14 @@ namespace API.Entities
         public List<Photo> Photos { get; set; } = [];
 
         [JsonIgnore]
+        public List<MemberLike> LikedByMembers { get; set; } = [];
+
+        [JsonIgnore]
+        public List<MemberLike> LikedMembers { get; set; } = [];
+
+
+
+        [JsonIgnore]
         [ForeignKey(nameof(Id))]
         public AppUser User { get; set; } = null!;
     }
