@@ -29,6 +29,10 @@
         "@schematics/angular:pipe": {
           "skipImport": true,
           "path": "src/core/pipes"
+        },
+        "@schematics/angular:directive": {
+          "skipImport": true,
+          "path": "src/shared/directives"
         }
 
       },
