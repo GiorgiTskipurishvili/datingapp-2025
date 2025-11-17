@@ -91,9 +91,5 @@ namespace API.Data
                 .ExecuteDeleteAsync();
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await context.SaveChangesAsync() > 0;
-        }
     }
 }

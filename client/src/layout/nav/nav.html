@@ -54,7 +54,7 @@
                         <img [src]="user?.imageUrl || '/user.png'" alt="user avatar" class="w-10 h-10 rounded-full">
                          <span>{{user.displayName}}</span>
                     </div>
-                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                    <ul (click)="handleSelectUserItem()" tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                       <li><a routerLink="/members/{{user.id}}">Edit profile</a></li>
                       <li><a (click)="logout()">Logout</a></li>
                     </ul>
@@ -73,7 +73,13 @@
                         type="password" 
                         class="input" 
                         placeholder="Password">
-                    <button class="btn">Login</button> 
+                    <button 
+                        class="btn btn-primary">
+                        @if(loading()){
+                            <span class="mr-2 loading loading-spinner"></span>
+                        }
+                        Login
+                    </button> 
                 </form>
             }
         </div>
