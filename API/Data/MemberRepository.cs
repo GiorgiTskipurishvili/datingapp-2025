@@ -15,9 +15,10 @@ namespace API.Data
         public async Task<Member?> GetMemberForUpdate(string id)
         {
             return await context.Members
-                .Include(x=>x.User)
+                .Include(x => x.User)
                 .Include(x => x.Photos)
-                .SingleOrDefaultAsync(x=>x.Id==id);
+                .IgnoreQueryFilters()
+                .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<PaginatedResult<Member>> GetMembersAsync(MemberParams memberParams)
@@ -45,13 +46,17 @@ namespace API.Data
             return await PaginationHelper.CreateAsync(query, memberParams.PageNumber, memberParams.PageSize);   
         }
 
-        public async Task<IReadOnlyList<Photo>> GetPhotosByMemberIdAsync(string memberId)
+        public async Task<IReadOnlyList<Photo>> GetPhotosForMemberAsync(string memberId, bool isCurrentUser)
         {
-            return await context.Members
-                .Where(x=>x.Id==memberId)
-                .SelectMany(x=> x.Photos)
-                .ToListAsync();
+            var query = context.Members
+                .Where(x => x.Id == memberId)
+                .SelectMany(x => x.Photos);
+
+            if (isCurrentUser) query = query.IgnoreQueryFilters();
+
+            return await query.ToListAsync();
         }
+
 
         public void Update(Member member)
         {
